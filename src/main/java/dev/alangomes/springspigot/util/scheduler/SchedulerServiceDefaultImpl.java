@@ -3,6 +3,7 @@ package dev.alangomes.springspigot.util.scheduler;
 import dev.alangomes.springspigot.context.Context;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.scheduler.BukkitTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,10 @@ class SchedulerServiceDefaultImpl implements SchedulerService, Scheduler {
     @Override
     public boolean isQueued(int taskId) {
         return scheduler.isQueued(taskId);
+    }
+
+    @Override
+    public BukkitTask scheduleAsyncTask(Plugin plugin, Runnable task) {
+        return scheduler.runTaskAsynchronously(plugin, context.wrap(task));
     }
 }

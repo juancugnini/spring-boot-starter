@@ -1,5 +1,8 @@
 package dev.alangomes.springspigot.util.scheduler;
 
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitTask;
+
 /**
  * Wrapper around {@link org.bukkit.scheduler.BukkitScheduler BukkitScheduler} to remove the need of the plugin reference
  * as well as keep the context during the tasks.
@@ -73,4 +76,6 @@ public interface SchedulerService {
      * @return If the task is queued to be run.
      */
     boolean isQueued(int taskId);
+
+    BukkitTask scheduleAsyncTask(Plugin plugin, Runnable task);
 }

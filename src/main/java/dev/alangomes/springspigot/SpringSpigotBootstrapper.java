@@ -3,6 +3,7 @@ package dev.alangomes.springspigot;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.springframework.boot.Banner;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -35,7 +36,6 @@ public final class SpringSpigotBootstrapper {
     }
 
     public static ConfigurableApplicationContext initialize(String serverExecutor, JavaPlugin plugin, ClassLoader classLoader, SpringApplicationBuilder builder) throws ExecutionException, InterruptedException {
-
         switch (serverExecutor
                 .toLowerCase(Locale.ROOT)) {
             case "spigot" -> {
@@ -76,6 +76,7 @@ public final class SpringSpigotBootstrapper {
         }
         return builder
                 .properties(props)
+                .bannerMode(Banner.Mode.OFF)
                 .initializers(new SpringSpigotInitializer(plugin))
                 .run();
     }
